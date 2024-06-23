@@ -10,9 +10,10 @@ You are given a free-text clinical note (<<text>>) from electronic health record
 
 Do not infer the impact of <<text>> onto the attributes, instead focus on the factual information only which is present at the time of <<text>>.
 
-Your final response should ONLY contain ONE word i.e., "YES" if atleast one attribute is detected else "NO"
+Your final response must contain only ONE word i.e., "YES" if atleast one attribute is detected from any category else "NO". 
 
-<<{free_text}>>
+Input: <<{free_text}>>
+Result:
 '''
 
 
