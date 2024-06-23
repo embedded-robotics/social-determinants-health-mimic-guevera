@@ -1,3 +1,21 @@
+step1_query_optimized = '''
+You are given a free-text clinical note (<<text>>) from electronic health records. For each of the following categories, determine the attribute that accurately describes the status of the patient at the time of <<text>>. The category is shown in double quote and the attributes are shown in square brackets: 
+
+1. "EMPLOYMENT": ["Employed", "Underemployed", "Unemployed", "Disability", "Retired", "Student"];
+2. "TRANSPORTATION": ["Distance", "Resource"];
+3. "HOUSING": ["Poor", "Undomiciled"];
+4. "MARITAL_STATUS": ["Married", "Partnered", "Divorced", "Widowed", "Single"];
+5. "RELATIONSHIP_CONDITION": ["NonAdverse", "Adverse"];
+6. "EMPLOYMENT_CONDITION": ["NonAdverse", "Adverse"];
+
+Do not infer the impact of <<text>> onto the attributes, instead focus on the factual information only which is present at the time of <<text>>.
+
+Your final response should ONLY contain ONE word i.e., "YES" if atleast one attribute is detected else "NO"
+
+<<{free_text}>>
+'''
+
+
 step1_query = '''
 This prompt consists of two sections: "Instruction" and "Input" which contains a clinical free-text from electronic healht records for you to parse.
 
