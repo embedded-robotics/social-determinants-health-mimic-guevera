@@ -1,16 +1,16 @@
 step1_query_optimized = '''
-You are given a free-text clinical note (<<text>>) from electronic health records. For each of the following categories, determine the attribute that accurately describes the status of the patient at the time of <<text>>. The category is shown in double quote and the attributes are shown in square brackets: 
+You are given a free-text clinical note (<<text>>) from electronic health records. For each of the following categories, determine the attribute that accurately describes the status of the patient at the time of <<text>>. Do not infer the impact of <<text>> onto the attributes, instead focus on the factual information only which is present at the time of <<text>>.
+The category is shown in double quotes and the attributes are shown in square brackets: 
 
-1. "EMPLOYMENT": ["Employed", "Underemployed", "Unemployed", "Disability", "Retired", "Student"];
-2. "TRANSPORTATION": ["Distance", "Resource"];
-3. "HOUSING": ["Poor", "Undomiciled"];
-4. "MARITAL_STATUS": ["Married", "Partnered", "Divorced", "Widowed", "Single"];
-5. "RELATIONSHIP_CONDITION": ["NonAdverse", "Adverse"];
-6. "EMPLOYMENT_CONDITION": ["NonAdverse", "Adverse"];
+1. "EMPLOYMENT": ['Employed', 'Underemployed', 'Unemployed', 'Disability', 'Retired', 'Student'];
+2. "TRANSPORTATION": ['Distance', 'Resource'];
+3. "HOUSING": ['Poor', 'Undomiciled'];
+4. "MARITAL_STATUS": ['Married', 'Partnered', 'Divorced', 'Widowed', 'Single'];
+5. "RELATIONSHIP_CONDITION": ['NonAdverse', 'Adverse'];
+6. "EMPLOYMENT_CONDITION": ['NonAdverse', 'Adverse'];
 
-Do not infer the impact of <<text>> onto the attributes, instead focus on the factual information only which is present at the time of <<text>>.
-
-Your final response must contain only ONE word i.e., "YES" if atleast one attribute is detected from any category else "NO". 
+After determining the attribute of each category, you must consolidate this information in a ONE word reply i.e., "YES" if a valid attribute is determined for atleast one category, else "NO".
+In your final answer, do not provide information about each indivdual category. You must return "YES" or "NO", and nothing else.
 
 Input: <<{free_text}>>
 Result:
@@ -38,7 +38,7 @@ You must create key-value pair in json formats for all the categories:
 <category>_CD: <the certainty degree of your estimation: [0.00, 1.00]>,
 <category>_evidence: < brief evidence from <<text>> supporting the attribute you choose >.
 
-Do not infer the impact of <<text>> onto the attributes, focus on the factual information only which is present at the time of <<text>>. 
+Do not infer the impact of <<text>> onto the attributes, focus on the factual information only which is present at the time of <<text>>.
 Even if the <<text>> concerns over a change in the status of any category, maintain their original attribute status at the time of <<text>>. For example "fear that she will lose her current job" is considered to be "EMPLOYMENT_CONDITION" with “Nonadverse” attribute.
 
 Section 2: Input
