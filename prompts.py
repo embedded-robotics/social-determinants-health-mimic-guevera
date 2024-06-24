@@ -10,7 +10,7 @@ The category is shown in double quotes and the attributes are shown in square br
 6. "EMPLOYMENT_CONDITION": ['NonAdverse', 'Adverse'];
 
 After determining the attribute of each category, you must consolidate this information in a ONE word reply i.e., "YES" if a valid attribute is determined for atleast one category, else "NO".
-In your final answer, do not provide information about each indivdual category. You must return "YES" or "NO", and nothing else.
+In your final response, do not provide information about each indivdual category or attribute. You must return only "YES" or "NO" in your final response, and nothing else.
 
 Input: <<{free_text}>>
 Result:
