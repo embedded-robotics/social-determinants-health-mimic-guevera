@@ -16,7 +16,6 @@ Input: <<{free_text}>>
 Result:
 '''
 
-
 step1_query = '''
 This prompt consists of two sections: "Instruction" and "Input" which contains a clinical free-text from electronic healht records for you to parse.
 
