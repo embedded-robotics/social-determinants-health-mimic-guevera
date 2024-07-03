@@ -56,33 +56,6 @@ def send_message(message, model_name, max_response_tokens=500):
     
     return response.choices[0].message.content.strip()
 
-# 0-500
-index_list = []
-llm_response_list = []
-system_message = "You are an information extract tool that follows instructions very well and is specifically trained to extract social determinants of health elements from hospital generated free-text."
-
-try:
-    for index, row in final_df[4000:4500].iterrows():
-        free_text = row['text']
-        user_message = step1_query_optimized.format(free_text=free_text)
-        openai_message = create_prompt(system_message, user_message)
-        response = send_message(openai_message, deployment_name)
-        
-        index_list.append(index)
-        llm_response_list.append(response)
-        print(index)
-        print(free_text)
-        print(response)
-        print()
-except Exception as err:
-    print("Something went wrong: ", err)
-
-llm_4000_4500_step1 = pd.DataFrame({'index': index_list, 'llm_4000_4500_step1': llm_response_list})
-
-with open('llm_4000_4500_step1.pkl', 'wb') as file:
-    pickle.dump(llm_4000_4500_step1, file)
-
-
 # 500-1000
 index_list = []
 llm_response_list = []
