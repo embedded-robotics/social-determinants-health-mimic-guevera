@@ -62,7 +62,7 @@ llm_response_list = []
 system_message = "You are an information extract tool that follows instructions very well and is specifically trained to extract social determinants of health elements from hospital generated free-text."
 
 try:
-    for index, row in final_df[5293:5321].iterrows():
+    for index, row in final_df[2254:2500].iterrows():
         free_text = row['text']
         user_message = step1_query_optimized.format(free_text=free_text)
         openai_message = create_prompt(system_message, user_message)
@@ -77,37 +77,37 @@ try:
 except Exception as err:
     print("Something went wrong: ", err)
     
-llm_5293_5321_step1 = pd.DataFrame({'index': index_list, 'llm_5293_5321_step1': llm_response_list})
+llm_2254_2500_step1 = pd.DataFrame({'index': index_list, 'llm_2254_2500_step1': llm_response_list})
 
-with open('llm_5293_5321_step1.pkl', 'wb') as file:
-    pickle.dump(llm_5293_5321_step1, file)
+with open('llm_2254_2500_step1.pkl', 'wb') as file:
+    pickle.dump(llm_2254_2500_step1, file)
     
 
-# # 1000-1500
-# index_list = []
-# llm_response_list = []
-# system_message = "You are an information extract tool that follows instructions very well and is specifically trained to extract social determinants of health elements from hospital generated free-text."
+# 1000-1500
+index_list = []
+llm_response_list = []
+system_message = "You are an information extract tool that follows instructions very well and is specifically trained to extract social determinants of health elements from hospital generated free-text."
 
-# try:
-#     for index, row in final_df[3500:4000].iterrows():
-#         free_text = row['text']
-#         user_message = step1_query_optimized.format(free_text=free_text)
-#         openai_message = create_prompt(system_message, user_message)
-#         response = send_message(openai_message, deployment_name)
+try:
+    for index, row in final_df[3485:3500].iterrows():
+        free_text = row['text']
+        user_message = step1_query_optimized.format(free_text=free_text)
+        openai_message = create_prompt(system_message, user_message)
+        response = send_message(openai_message, deployment_name)
         
-#         index_list.append(index)
-#         llm_response_list.append(response)
-#         print(index)
-#         print(free_text)
-#         print(response)
-#         print()
-# except Exception as err:
-#     print("Something went wrong: ", err)
+        index_list.append(index)
+        llm_response_list.append(response)
+        print(index)
+        print(free_text)
+        print(response)
+        print()
+except Exception as err:
+    print("Something went wrong: ", err)
     
-# llm_3500_4000_step1 = pd.DataFrame({'index': index_list, 'llm_3500_4000_step1': llm_response_list})
+llm_3485_3500_step1 = pd.DataFrame({'index': index_list, 'llm_3485_3500_step1': llm_response_list})
 
-# with open('llm_3500_4000_step1.pkl', 'wb') as file:
-#     pickle.dump(llm_3500_4000_step1, file)
+with open('llm_3485_3500_step1.pkl', 'wb') as file:
+    pickle.dump(llm_3485_3500_step1, file)
     
 
 # # 1500-2000
