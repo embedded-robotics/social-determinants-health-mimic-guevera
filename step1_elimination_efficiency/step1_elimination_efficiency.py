@@ -62,7 +62,7 @@ llm_response_list = []
 system_message = "You are an information extract tool that follows instructions very well and is specifically trained to extract social determinants of health elements from hospital generated free-text."
 
 try:
-    for index, row in final_df[3648:4000].iterrows():
+    for index, row in final_df[3885:4000].iterrows():
         free_text = row['text']
         user_message = step1_query_optimized.format(free_text=free_text)
         openai_message = create_prompt(system_message, user_message)
@@ -77,10 +77,10 @@ try:
 except Exception as err:
     print("Something went wrong: ", err)
     
-llm_3648_4000_step1 = pd.DataFrame({'index': index_list, 'llm_3648_4000_step1': llm_response_list})
+llm_3885_4000_step1 = pd.DataFrame({'index': index_list, 'llm_3885_4000_step1': llm_response_list})
 
-with open('llm_3648_4000_step1.pkl', 'wb') as file:
-    pickle.dump(llm_3648_4000_step1, file)
+with open('llm_3885_4000_step1.pkl', 'wb') as file:
+    pickle.dump(llm_3885_4000_step1, file)
 
 
 # # 1000-1500
