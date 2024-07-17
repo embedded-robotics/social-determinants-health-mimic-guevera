@@ -16,6 +16,20 @@ Input: <<{free_text}>>
 Result:
 '''
 
+step1_query_ahsan = '''
+You are given a free-text clinical note (<<text>>) from electronic health records. For each of the following categories, determine the attribute that accurately describes the status of the patient at the time of <<text>>. Do not infer the impact of <<text>> onto the attributes, instead focus on the factual information only which is present at the time of <<text>>.
+The category is shown in double quotes and the attributes are shown in square brackets: 
+
+1. "EMPLOYMENT": ['Non-Adverse', 'Adverse'];
+2. "HOUSING": ['Non-Adverse', 'Adverse'];
+
+After determining the attribute of each category, you must consolidate this information in a ONE word reply i.e., "YES" if a valid attribute is determined for atleast one category, else "NO".
+In your final response, do not provide information about each indivdual category or attribute. You must return only "YES" or "NO" in your final response, and nothing else.
+
+Input: <<{free_text}>>
+Result:
+'''
+
 step1_query = '''
 This prompt consists of two sections: "Instruction" and "Input" which contains a clinical free-text from electronic healht records for you to parse.
 
