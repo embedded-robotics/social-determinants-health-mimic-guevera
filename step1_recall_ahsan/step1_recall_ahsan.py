@@ -117,7 +117,7 @@ filtered_df = annotated_sh[(annotated_sh['sdoh_economics'] == 1) | (annotated_sh
 filtered_df = filtered_df.reset_index(drop=True)
 system_message = "You are an information extract tool that follows instructions very well and is specifically trained to extract social determinants of health elements from hospital generated free-text."
 
-start_index = 0
+start_index = 542
 
 try:
     for index, row in filtered_df[start_index:len(filtered_df)].iterrows():
