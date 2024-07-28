@@ -114,11 +114,11 @@ def send_message(message, model_name, max_response_tokens=500):
 # Getting the results and saving it
 index_list = []
 llm_response_list = []
-filtered_df = annotated_sh[(annotated_sh['sdoh_economics'] == 1) | (annotated_sh['sdoh_economics'] == 2)]
+filtered_df = annotated_sh[(annotated_sh['sdoh_environment'] == 1) | (annotated_sh['sdoh_environment'] == 2)]
 filtered_df = filtered_df.reset_index(drop=True)
 system_message = "You are an information extract tool that follows instructions very well and is specifically trained to extract social determinants of health elements from hospital generated free-text."
 
-start_index = 1292
+start_index = 0
 current_index = start_index
 total_records = len(filtered_df)
 
@@ -150,8 +150,8 @@ while True:
         break
 
 
-llm_employment_adverse_nonadverse_step1 = pd.DataFrame({'index': index_list, 'llm_employment_adverse_nonadverse_step1': llm_response_list})
+llm_environment_adverse_nonadverse_step1 = pd.DataFrame({'index': index_list, 'llm_environment_adverse_nonadverse_step1': llm_response_list})
 
-file_name = 'llm_employment_adverse_nonadverse_step1_' + str(start_index) + '_' + str(total_records) + '.pkl'
+file_name = 'llm_environment_adverse_nonadverse_step1_' + str(start_index) + '_' + str(total_records) + '.pkl'
 with open(file_name, 'wb') as file:
-    pickle.dump(llm_employment_adverse_nonadverse_step1, file)
+    pickle.dump(llm_environment_adverse_nonadverse_step1, file)
