@@ -5,6 +5,7 @@ import pickle
 from openai import AzureOpenAI
 import sys
 import json
+import time
 
 sys.path.append(os.path.join(os.getcwd(), '..'))
 
@@ -118,25 +119,39 @@ filtered_df = filtered_df.reset_index(drop=True)
 system_message = "You are an information extract tool that follows instructions very well and is specifically trained to extract social determinants of health elements from hospital generated free-text."
 
 start_index = 1292
+current_index = start_index
+total_records = len(filtered_df)
 
-try:
-    for index, row in filtered_df[start_index:len(filtered_df)].iterrows():
-        free_text = row['TEXT']
-        user_message = step1_query_ahsan.format(free_text=free_text)
-        openai_message = create_prompt(system_message, user_message)
-        response = send_message(openai_message, deployment_name)
-        
-        index_list.append(index)
-        llm_response_list.append(response)
-        print(index)
-        print(free_text)
-        print(response)
-        print()
-except Exception as err:
-    print("Something went wrong: ", err)
+while True:
+    try:
+        for index in range(start_index, total_records):
+            current_index = index
+            row = filtered_df.iloc[current_index, :]
+            free_text = row['TEXT']
+            user_message = step1_query_ahsan.format(free_text=free_text)
+            openai_message = create_prompt(system_message, user_message)
+            response = send_message(openai_message, deployment_name)
+            
+            index_list.append(current_index)
+            llm_response_list.append(response)
+            print(current_index)
+            print(free_text)
+            print(response)
+            print()
+
+    except Exception as err:
+        print("Something went wrong: ", err)
+        start_index = current_index
+        print("Waiting for 10 seconds before continuing again with index:", start_index)
+        time.sleep(10)
+
+    # Break the loop if current_index has completed
+    if current_index == (total_records - 1):
+        break
+
 
 llm_employment_adverse_nonadverse_step1 = pd.DataFrame({'index': index_list, 'llm_employment_adverse_nonadverse_step1': llm_response_list})
 
-file_name = 'llm_employment_adverse_nonadverse_step1_' + str(start_index) + '_' + str(len(filtered_df)) + '.pkl'
+file_name = 'llm_employment_adverse_nonadverse_step1_' + str(start_index) + '_' + str(total_records) + '.pkl'
 with open(file_name, 'wb') as file:
     pickle.dump(llm_employment_adverse_nonadverse_step1, file)
